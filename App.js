@@ -6,6 +6,7 @@ import * as Font from "expo-font";
 import { Ionicons } from "@expo/vector-icons";
 import {NavigationContainer} from "@react-navigation/native";
 import Stack from "./navigaition/Stack";
+import {StatusBar} from "expo-status-bar";
 
 
 const cacheImages = (images) =>
@@ -31,9 +32,12 @@ export default function App() {
   };
   const onFinish = () => setIsReady(true);
   return isReady ? (
-    <NavigationContainer>
-      <Stack />
-    </NavigationContainer>
+    <>
+      <NavigationContainer>
+        <Stack />
+      </NavigationContainer>
+      <StatusBar barStyle='light-content'/>
+    </>
   ) : (
     <AppLoading
       startAsync={loadAssets}
