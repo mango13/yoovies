@@ -8,8 +8,10 @@ const Image = styled.Image`
   border-radius: 4px;
 `;
 
-export const Poster = ({ url }) => <Image source={{ uri: url }} />;
+const Poster = ({ url }) => <Image source={{ uri: url }} />;
 
 Poster.propTypes = {
   url: PropTypes.string.isRequired,
 };
+
+export default Poster;
