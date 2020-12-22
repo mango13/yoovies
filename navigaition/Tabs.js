@@ -2,7 +2,7 @@ import React, { useLayoutEffect } from "react";
 import { Platform } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native'
-import Movies from "../screens/Movies";
+import Movies from "../screens/Movies/MoviesContainer";
 import TV from "../screens/TV";
 import Search from "../screens/Search";
 import Favs from "../screens/Favs";

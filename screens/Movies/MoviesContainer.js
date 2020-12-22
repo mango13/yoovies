@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Text, View } from "react-native";
-import { movieApi } from "../api";
+import { movieApi } from "../../api";
+import MoviesPresenter from './MoviesPresenter';
 
 export default () => {
   const [movies, setMovies] = useState({
+    loading: true,
     nowPlaying: [],
     popular: [],
     upcoming: [],
@@ -15,8 +17,9 @@ export default () => {
     const [nowPlaying, nowPlayingError] = await movieApi.nowPlaying();
     const [popular, popularError] = await movieApi.popular();
     const [upcoming, upcomingError] = await movieApi.upcoming();
-    // 한번만 렌더하기 위해서 뚱뚱한 state를 만들어줌
+
     setMovies({
+      loading: false,
       nowPlaying,
       popular,
       upcoming,
@@ -30,14 +33,5 @@ export default () => {
     getData();
   }, []);
 
-  return (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: "black",
-      }}
-    >
-      <Text style={{ color: "white" }}>{movies.nowPlaying?.length}</Text>
-    </View>
-  );
+  return <MoviesPresenter {...movies} />;
 };
