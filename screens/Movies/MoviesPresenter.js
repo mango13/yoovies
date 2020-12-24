@@ -4,6 +4,7 @@ import Swiper from "react-native-web-swiper";
 import { ActivityIndicator, Dimensions, ScrollView } from "react-native";
 import Slide from "../../components/Movies/Slide";
 import Title from "../../components/Title";
+import Vertical from "../../components/Vertical";
 
 const { width: WIDTH, height: HEIGHT } = Dimensions.get("window");
 
@@ -15,14 +16,18 @@ const SliderContainer = styled.View`
 
 const Scroll = styled.ScrollView`
   background-color: black;
-  flex:1;
+  flex: 1;
 `;
 
-const Container = styled.View``;
+const Container = styled.View`
+  
+`;
 
-export default ({ loading, nowPlaying }) => (
+export default ({ loading, nowPlaying, popular }) => (
   <Scroll
-      contentContainerStyle={{ justifyContent: loading ? "center" : "flex-start" }}
+    contentContainerStyle={{
+      justifyContent: loading ? "center" : "flex-start",
+    }}
   >
     {loading ? (
       <ActivityIndicator color="white" size="small" />
@@ -45,8 +50,22 @@ export default ({ loading, nowPlaying }) => (
         </SliderContainer>
         <Container>
           <Title title="Popular Movies" />
+          <ScrollView
+            horizontal
+            contentContainerStyle={{ paddingLeft: 30 }}
+            showsHorizontalScrollIndicator={false}
+            style={{ marginTop: 20 }}
+          >
+            {popular.map((movie) => (
+              <Vertical
+                key={movie.id}
+                poster={movie.poster_path}
+                title={movie.title}
+                votes={movie.vote_average}
+              />
+            ))}
+          </ScrollView>
         </Container>
-
       </>
     )}
   </Scroll>
