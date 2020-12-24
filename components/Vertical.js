@@ -3,8 +3,8 @@ import { TouchableOpacity } from "react-native";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
 import Poster from "./Poster";
-import { apiImage } from "../api";
 import Votes from "./Movies/Votes";
+import { trimText } from "../utils";
 
 const Container = styled.View`
   align-items: center;
@@ -18,20 +18,20 @@ const Title = styled.Text`
 `;
 
 const Vertical = ({ id, poster, title, votes }) => (
-    <TouchableOpacity>
-        <Container>
-            <Poster url={apiImage(poster)} />
-            <Title>{title.length > 10 ? `${title.slice(0, 10)}...` : title}</Title>
-            <Votes votes={votes} />
-        </Container>
-    </TouchableOpacity>
+  <TouchableOpacity>
+    <Container>
+      <Poster url={poster} />
+      <Title>{trimText(title, 10)}</Title>
+      <Votes votes={votes} />
+    </Container>
+  </TouchableOpacity>
 );
 
 Vertical.propTyes = {
-    id: PropTypes.number.isRequired,
-    poster: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    votes: PropTypes.number.isRequired,
+  id: PropTypes.number.isRequired,
+  poster: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  votes: PropTypes.number.isRequired,
 };
 
 export default Vertical;
