@@ -1,34 +1,33 @@
 import React, { useEffect, useState } from "react";
-import { Text, View } from "react-native";
-import { tvApi } from "../api";
+import { tvApi } from "../../api";
+import TvPresenter from './TvPresenter';
 
 export default () => {
     const [shows, setShows] = useState({
-        today: [],
-        thisWeek: [],
-        topRated: [],
+        loading: true,
+        nowPlaying: [],
         popular: [],
-        todayError: null,
-        thisWeekError: null,
-        topRatedError: null,
+        upcoming: [],
         popularError: null,
-
+        nowPlayingError: null,
+        upcomingError: null,
     });
     const getData = async () => {
         const [today, todayError] = await tvApi.today();
+        const [popular, popularError] = await tvApi.popular();
         const [thisWeek, thisWeekError] = await tvApi.thisWeek();
         const [topRated, topRatedError] = await tvApi.topRated();
-        const [popular, popularError] = await tvApi.popular();
 
         setShows({
+            loading: false,
             today,
+            popular,
             thisWeek,
             topRated,
-            popular,
             todayError,
+            popularError,
             thisWeekError,
             topRatedError,
-            popularError,
         });
     };
 
@@ -36,14 +35,5 @@ export default () => {
         getData();
     }, []);
 
-    return (
-        <View
-            style={{
-                flex: 1,
-                backgroundColor: "black",
-            }}
-        >
-            <Text style={{ color: "white" }}>{shows.today?.length}</Text>
-        </View>
-    );
+    return <TvPresenter {...shows} />;
 };
