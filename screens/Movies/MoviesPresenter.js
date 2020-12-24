@@ -17,7 +17,6 @@ const SliderContainer = styled.View`
 
 const Scroll = styled.ScrollView`
   background-color: black;
-  flex: 1;
 `;
 
 const Container = styled.View``;
@@ -30,7 +29,7 @@ export default ({ loading, nowPlaying, popular, upcoming }) => (
   <Scroll
     contentContainerStyle={{
       justifyContent: loading ? "center" : "flex-start",
-      // flex: 1,
+      flex: loading ? 1 : "auto",
     }}
   >
     {loading ? (
