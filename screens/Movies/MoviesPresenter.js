@@ -5,11 +5,12 @@ import { ActivityIndicator, Dimensions, ScrollView } from "react-native";
 import Slide from "../../components/Movies/Slide";
 import Title from "../../components/Title";
 import Vertical from "../../components/Vertical";
+import Horizontal from "../../components/Horizontal";
 
 const { width: WIDTH, height: HEIGHT } = Dimensions.get("window");
 
 const SliderContainer = styled.View`
-  width: ${WIDTH}px;
+  width: 100%;
   height: ${HEIGHT / 4}px;
   margin-bottom: 50px;
 `;
@@ -19,14 +20,13 @@ const Scroll = styled.ScrollView`
   flex: 1;
 `;
 
-const Container = styled.View`
-  
-`;
+const Container = styled.View``;
 
-export default ({ loading, nowPlaying, popular }) => (
+export default ({ loading, nowPlaying, popular, upcoming }) => (
   <Scroll
     contentContainerStyle={{
       justifyContent: loading ? "center" : "flex-start",
+      // flex: 1,
     }}
   >
     {loading ? (
@@ -54,10 +54,11 @@ export default ({ loading, nowPlaying, popular }) => (
             horizontal
             contentContainerStyle={{ paddingLeft: 30 }}
             showsHorizontalScrollIndicator={false}
-            style={{ marginTop: 20 }}
+            style={{ marginTop: 20, marginBottom: 40 }}
           >
             {popular.map((movie) => (
               <Vertical
+                id={movie.id}
                 key={movie.id}
                 poster={movie.poster_path}
                 title={movie.title}
@@ -65,6 +66,17 @@ export default ({ loading, nowPlaying, popular }) => (
               />
             ))}
           </ScrollView>
+          <Title title={"Coming Soon"}></Title>
+          {upcoming.map((movie) => (
+            <Horizontal
+              key={movie.id}
+              id={movie.id}
+              title={movie.title}
+              votes={movie.vote_average}
+              poster={movie.poster_path}
+              overview={movie.overview}
+            />
+          ))}
         </Container>
       </>
     )}

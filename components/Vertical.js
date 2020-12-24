@@ -17,20 +17,21 @@ const Title = styled.Text`
   margin: 10px 0px 5px 0px;
 `;
 
-const Vertical = ({ poster, title, votes }) => (
-  <TouchableOpacity>
-    <Container>
-      <Poster url={apiImage(poster)} />
-      <Title>{title.length > 10 ? `${title.slice(0, 10)}...` : title}</Title>
-      <Votes votes={votes} />
-    </Container>
-  </TouchableOpacity>
+const Vertical = ({ id, poster, title, votes }) => (
+    <TouchableOpacity>
+        <Container>
+            <Poster url={apiImage(poster)} />
+            <Title>{title.length > 10 ? `${title.slice(0, 10)}...` : title}</Title>
+            <Votes votes={votes} />
+        </Container>
+    </TouchableOpacity>
 );
 
 Vertical.propTyes = {
-  poster: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  votes: PropTypes.number.isRequired,
+    id: PropTypes.number.isRequired,
+    poster: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    votes: PropTypes.number.isRequired,
 };
 
 export default Vertical;
