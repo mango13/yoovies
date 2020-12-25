@@ -14,7 +14,7 @@ export default ({ loading, popular, topRated, today }) => (
   <ScrollContainer loading={loading}>
     <Container>
       <HorizontalSlider title="Popular Shows">
-        {popular.map((show) => (
+        {popular?.map((show) => (
           <Vertical
             id={show.id}
             key={show.id}
@@ -36,7 +36,7 @@ export default ({ loading, popular, topRated, today }) => (
         ))}
       </HorizontalSlider>
       <List title="Airing Today">
-        {today.map((show) => (
+        {today?.map((show) => (
           <Horizontal
             key={show.id}
             id={show.id}
