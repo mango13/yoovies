@@ -19,12 +19,12 @@ const SliderContainer = styled.View`
 
 const Container = styled.View``;
 
-export default ({ loading, nowPlaying, popular, upcoming }) => (
-  <ScrollContainer loading={loading}>
+export default ({ loading, nowPlaying, popular, upcoming, refreshFn }) => (
+  <ScrollContainer loading={loading} refreshFn={refreshFn}>
     <>
       <SliderContainer>
         <Swiper controlsEnabled={false} loop timeout={5}>
-          {nowPlaying.map((movie) => (
+          {nowPlaying?.map((movie) => (
             <Slide
               key={movie.id}
               id={movie.id}
@@ -39,7 +39,7 @@ export default ({ loading, nowPlaying, popular, upcoming }) => (
       </SliderContainer>
       <Container>
         <HorizontalSlider title="Popular Movies">
-          {popular.map((movie) => (
+          {popular?.map((movie) => (
             <Vertical
               id={movie.id}
               key={movie.id}
@@ -50,7 +50,7 @@ export default ({ loading, nowPlaying, popular, upcoming }) => (
           ))}
         </HorizontalSlider>
         <List title="Coming Soon">
-          {upcoming.map((movie) => (
+          {upcoming?.map((movie) => (
             <Horizontal
               key={movie.id}
               id={movie.id}

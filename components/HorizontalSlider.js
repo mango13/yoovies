@@ -19,7 +19,7 @@ const HorizonSlider =  ({ title, children }) => (
 
 HorizonSlider.propTypes = {
     title: PropTypes.string.isRequired,
-    children: PropTypes.node.isRequired,
+    children: PropTypes.node,
 }
 
 export default HorizonSlider;

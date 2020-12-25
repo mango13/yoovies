@@ -12,6 +12,9 @@ export default () => {
   });
   const onChange = (text) => setKeyword(text);
   const search = async () => {
+    if(keyword === "") {
+      return;
+    }
     const [movies, moviesError] = await movieApi.search(keyword);
     const [shows, showsError] = await tvApi.search(keyword);
     setResults({
@@ -21,12 +24,11 @@ export default () => {
       showsError,
     });
   };
-  console.log(results);
   return (
     <SearchPresenter
       {...results}
-      onChange={onChange}
       onSubmit={search}
+      onChange={onChange}
       keyword={keyword}
     />
   );
