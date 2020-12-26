@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components/native";
-import ScrollContainer from "../components/ScrollContainer";
-import { apiImage } from "../api";
 import { Dimensions } from "react-native";
-import Poster from "../components/Poster";
-import Votes from "../components/Movies/Votes";
+import { apiImage } from "../../api";
+import ScrollContainer from "../../components/ScrollContainer";
+import Poster from "../../components/Poster";
+import Votes from "../../components/Movies/Votes";
 
 const BG = styled.Image`
   position: absolute;
@@ -55,13 +55,7 @@ const DataValue = styled.Text`
   font-weight: 500;
 `;
 
-export default ({
-  navigation,
-  route: {
-    params: { id, title, backgroundImage, poster, votes, overview },
-  },
-}) => {
-  navigation.setOptions({ title });
+export default ({ title, backgroundImage, poster, votes, overview }) => {
   return (
     <ScrollContainer lading={false}>
       <>
@@ -77,10 +71,10 @@ export default ({
         </Header>
         <Data>
           {overview && (
-              <>
-                <DataName>Overview</DataName>
-                <DataValue>{overview}</DataValue>
-              </>
+            <>
+              <DataName>Overview</DataName>
+              <DataValue>{overview}</DataValue>
+            </>
           )}
         </Data>
       </>
