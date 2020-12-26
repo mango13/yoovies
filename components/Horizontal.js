@@ -35,10 +35,11 @@ const ReleaseDate = styled.Text`
   font-size: 12px;
 `;
 
-const Horizontal = ({ id, title, poster, overview, releaseDate }) => {
+const Horizontal = ({ id, title, poster, overview, releaseDate, isTv = false}) => {
   const navigation = useNavigation();
   const goToDetail = () => {
     navigation.navigate("Detail", {
+      isTv,
       id,
       title,
       poster,

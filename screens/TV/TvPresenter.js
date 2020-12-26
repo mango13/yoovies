@@ -21,6 +21,7 @@ export default ({ loading, popular, topRated, today, refreshFn }) => (
             poster={show.poster_path}
             title={show.name}
             votes={show.vote_average}
+            isTv
           />
         ))}
       </HorizontalSlider>
@@ -43,6 +44,7 @@ export default ({ loading, popular, topRated, today, refreshFn }) => (
             title={show.name}
             poster={show.poster_path}
             overview={show.overview}
+            isTv
           />
         ))}
       </List>
