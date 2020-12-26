@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components/native";
 import { TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import PropTypes from "prop-types";
 import { apiImage } from "../../api";
 import Poster from "../Poster";
@@ -59,6 +60,18 @@ const ButtonText = styled.Text`
 `;
 
 const Slide = ({ id, title, backgroundImage, votes, overview, poster }) => {
+  const navigation = useNavigation();
+  const goToDetail = () => {
+    navigation.navigate("Detail", {
+      id,
+      title,
+      backgroundImage,
+      votes,
+      overview,
+      poster,
+    });
+  };
+
   return (
     <Container>
       <BG source={{ uri: apiImage(backgroundImage) }} />
@@ -70,7 +83,7 @@ const Slide = ({ id, title, backgroundImage, votes, overview, poster }) => {
             <Votes votes={votes} />
           </VotesContainer>
           <Overview>{trimText(overview, 110)}</Overview>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={goToDetail}>
             <Button>
               <ButtonText>View details</ButtonText>
             </Button>
