@@ -36,7 +36,7 @@ const ScrollContainer = ({
 };
 
 ScrollContainer.propTypes = {
-  loading: PropTypes.bool.isRequired,
+  loading: PropTypes.bool,
   child: PropTypes.node,
   contentContainerStyle: PropTypes.object,
   refreshFn: PropTypes.func,

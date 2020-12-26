@@ -5,7 +5,7 @@ import { apiImage } from "../../api";
 import ScrollContainer from "../../components/ScrollContainer";
 import Poster from "../../components/Poster";
 import Votes from "../../components/Movies/Votes";
-import {formatDate} from "../../utils";
+import { formatDate } from "../../utils";
 
 const BG = styled.Image`
   position: absolute;
@@ -66,8 +66,8 @@ export default ({ result, loading }) => {
           <Container>
             <Poster url={result.poster} />
             <Info>
-                <Title>{result.title}</Title>
-                {result.votes && <Votes votes={result.votes} />}
+              <Title>{result.title}</Title>
+              {typeof result.votes === 'number' && <Votes votes={result.votes} />}
             </Info>
           </Container>
         </Header>
@@ -85,7 +85,7 @@ export default ({ result, loading }) => {
               style={{ marginTop: 30 }}
             />
           )}
-          {result.spoken_languages && (
+          {!!result.spoken_languages && (
             <>
               <DataName>Languages</DataName>
               <DataValue>
@@ -93,13 +93,11 @@ export default ({ result, loading }) => {
               </DataValue>
             </>
           )}
-          {result.release_date && (
-              <>
-                <DataName>Release Date</DataName>
-                <DataValue>
-                  {formatDate(result.release_date)}
-                </DataValue>
-              </>
+          {!!result.release_date && (
+            <>
+              <DataName>Release Date</DataName>
+              <DataValue>{formatDate(result.release_date)}</DataValue>
+            </>
           )}
         </Data>
       </>
