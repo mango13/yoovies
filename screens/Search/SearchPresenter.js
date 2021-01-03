@@ -4,13 +4,7 @@ import HorizontalSlider from "../../components/HorizontalSlider";
 import Vertical from "../../components/Vertical";
 import ScrollContainer from "../../components/ScrollContainer";
 
-export default ({
-  movies,
-  shows,
-  keyword,
-  onChange,
-  onSubmit,
-}) => (
+export default ({ movies, shows, keyword, onChange, onSubmit }) => (
   <ScrollContainer
     loading={false}
     contentContainerStyle={{
@@ -41,6 +35,7 @@ export default ({
       <HorizontalSlider title="TV Shows results">
         {shows?.map((show) => (
           <Vertical
+            isTv={true}
             key={show.id}
             id={show.id}
             title={show.name}
