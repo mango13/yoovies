@@ -43,26 +43,38 @@ export default ({ results }) => {
     },
   });
 
+  const rotationValues = position.x.interpolate({
+    inputRange: [-100, 0, 100],
+    outputRange: ["-5deg", "0deg", "5deg"],
+    extrapolate: "clamp",
+  });
+
   return (
     <Container>
-      {results.reverse().map((result, index) => {
-        if(index === topIndex) {
-          return <Animated.View
+      {results.map((result, index) => {
+        if (index === topIndex) {
+          return (
+            <Animated.View
               style={{
                 ...styles,
-                transform: [...position.getTranslateTransform()],
+                transform: [
+                  { rotate: rotationValues },
+                  ...position.getTranslateTransform(),
+                ],
                 zIndex: 1,
               }}
               key={result.id}
               {...panResponder.panHandlers}
-          >
-            <Poster source={{ uri: apiImage(result.poster_path) }} />
-          </Animated.View>;
+            >
+              <Poster source={{ uri: apiImage(result.poster_path) }} />
+            </Animated.View>
+          );
         }
         return (
           <Animated.View
             style={{
               ...styles,
+              zIndex: -index,
             }}
             key={result.id}
             {...panResponder.panHandlers}
