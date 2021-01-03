@@ -142,13 +142,16 @@ export default ({ openBrowser, result, loading }) => {
             </>
           )}
           {!!result.imdb_id && (
-            <Link
-              onPress={() =>
-                openBrowser(`https://www.imdb.com/title/${result.imdb_id}`)
-              }
-              text="IMDB Page"
-              icon="imdb"
-            />
+            <>
+              <DataName>Links</DataName>
+              <Link
+                onPress={() =>
+                  openBrowser(`https://www.imdb.com/title/${result.imdb_id}`)
+                }
+                text="IMDB Page"
+                icon="imdb"
+              />
+            </>
           )}
         </Data>
       </>
