@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "styled-components/native";
-import { Dimensions, ActivityIndicator } from "react-native";
+import { Dimensions, ActivityIndicator, TouchableOpacity } from "react-native";
 import { apiImage } from "../../api";
 import ScrollContainer from "../../components/ScrollContainer";
 import Poster from "../../components/Poster";
 import Votes from "../../components/Movies/Votes";
 import { formatDate } from "../../utils";
+import Link from "../../components/Detail/Link";
 
 const BG = styled.Image`
   position: absolute;
@@ -57,7 +58,7 @@ const DataValue = styled.Text`
   font-weight: 500;
 `;
 
-export default ({ result, loading }) => {
+export default ({ openBrowser, result, loading }) => {
   return (
     <ScrollContainer
       lading={loading}
@@ -111,20 +112,22 @@ export default ({ result, loading }) => {
             </>
           )}
           {!!result.genres && (
-              <>
-                <DataName>Genres</DataName>
-                <DataValue>
-                  {result.genres.map((g, index) =>
-                      index + 1 === result.genres.length ? g.name : `${g.name}, `
-                  )}
-                </DataValue>
-              </>
+            <>
+              <DataName>Genres</DataName>
+              <DataValue>
+                {result.genres.map((g, index) =>
+                  index + 1 === result.genres.length ? g.name : `${g.name}, `
+                )}
+              </DataValue>
+            </>
           )}
           {!!result.number_of_episodes && !!result.number_of_seasons && (
-              <>
-                <DataName>Seasons / Episodes</DataName>
-                <DataValue>{result.number_of_seasons} / {result.number_of_episodes}</DataValue>
-              </>
+            <>
+              <DataName>Seasons / Episodes</DataName>
+              <DataValue>
+                {result.number_of_seasons} / {result.number_of_episodes}
+              </DataValue>
+            </>
           )}
           {!!result.runtime && (
             <>
@@ -138,7 +141,15 @@ export default ({ result, loading }) => {
               <DataValue>{formatDate(result.first_air_date)}</DataValue>
             </>
           )}
-
+          {!!result.imdb_id && (
+            <Link
+              onPress={() =>
+                openBrowser(`https://www.imdb.com/title/${result.imdb_id}`)
+              }
+              text="IMDB Page"
+              icon="imdb"
+            />
+          )}
         </Data>
       </>
     </ScrollContainer>
