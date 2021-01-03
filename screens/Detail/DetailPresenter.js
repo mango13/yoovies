@@ -59,7 +59,10 @@ const DataValue = styled.Text`
 
 export default ({ result, loading }) => {
   return (
-    <ScrollContainer lading={loading}>
+    <ScrollContainer
+      lading={loading}
+      contentContainerStyle={{ paddingBottom: 580 }}
+    >
       <>
         <Header>
           <BG source={{ uri: apiImage(result.backgroundImage, "-") }} />
@@ -67,7 +70,9 @@ export default ({ result, loading }) => {
             <Poster url={result.poster} />
             <Info>
               <Title>{result.title}</Title>
-              {typeof result.votes === 'number' && <Votes votes={result.votes} />}
+              {typeof result.votes === "number" && (
+                <Votes votes={result.votes} />
+              )}
             </Info>
           </Container>
         </Header>
@@ -99,6 +104,41 @@ export default ({ result, loading }) => {
               <DataValue>{formatDate(result.release_date)}</DataValue>
             </>
           )}
+          {!!result.status && (
+            <>
+              <DataName>Status</DataName>
+              <DataValue>{result.status}</DataValue>
+            </>
+          )}
+          {!!result.genres && (
+              <>
+                <DataName>Genres</DataName>
+                <DataValue>
+                  {result.genres.map((g, index) =>
+                      index + 1 === result.genres.length ? g.name : `${g.name}, `
+                  )}
+                </DataValue>
+              </>
+          )}
+          {!!result.number_of_episodes && !!result.number_of_seasons && (
+              <>
+                <DataName>Seasons / Episodes</DataName>
+                <DataValue>{result.number_of_seasons} / {result.number_of_episodes}</DataValue>
+              </>
+          )}
+          {!!result.runtime && (
+            <>
+              <DataName>Runtime</DataName>
+              <DataValue>{result.runtime} minutes</DataValue>
+            </>
+          )}
+          {!!result.first_air_date && (
+            <>
+              <DataName>First Air Date</DataName>
+              <DataValue>{formatDate(result.first_air_date)}</DataValue>
+            </>
+          )}
+
         </Data>
       </>
     </ScrollContainer>
